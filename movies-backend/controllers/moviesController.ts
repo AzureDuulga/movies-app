@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import Movie from "../model/Movie";
-import { Model } from "mongoose";
 
 const getMovies = async (req: Request, res: Response) => {
   const limit = Number(req.query.limit) || 10;
