@@ -13,7 +13,7 @@ const Pagination = ({
       <button
         onClick={prevPage}
         className="h-12 border-2 border-r-0 border-red-600
-                px-4 rounded-l-lg hover:bg-red-500 text-white hover:text-white"
+                px-4 rounded-l-lg hover:bg-red-500 text-red-600 hover:text-white"
       >
         <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
       </button>
@@ -22,7 +22,7 @@ const Pagination = ({
           key={pg}
           onClick={setCur}
           className={`h-12 border-2 border-r-0 border-red-600
-                w-12 text-white  ${cur === pg && "bg-red-600 text-white"}`}
+                w-12 text-red-600 ${cur === pg && "text-white bg-red-100"}`}
         >
           {pg}
         </button>
@@ -30,7 +30,7 @@ const Pagination = ({
       <button
         onClick={nextPage}
         className="h-12 border-2  border-red-600
-                px-4 rounded-r-lg hover:bg-red-500 hover:text-white text-white"
+                px-4 rounded-r-lg hover:bg-red-500 hover:text-white text-red-600"
       >
         <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
       </button>

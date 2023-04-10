@@ -1,3 +1,5 @@
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import Pagination from "@/components/pagination";
 import usePosts from "@/hooks/usePosts";
 import Head from "next/head";
@@ -5,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { BiPlayCircle } from "react-icons/bi";
 
 interface IAwards {
   wins: Number;
@@ -52,10 +55,6 @@ export default function Home({ movies, pagination }: IMovies) {
   const pages = [1, 2, 3, 4, 5, 6];
   const [cur, setCur] = useState<number>(1);
 
-  // const response = usePosts("1");
-  console.log("PAGE", pagination);
-  // console.log("RESP", response);
-
   const handlePagination = (action: string) => {
     if (action === "next") {
       router.replace(`?limit=4&page=${pagination.page + 1}`);
@@ -72,27 +71,32 @@ export default function Home({ movies, pagination }: IMovies) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="bg-orange-300 min-h-screen">
-        <div className="container mx-auto">
-          <h1 className="font-bold text-white text-3xl">Movies List</h1>
+      <div className="bg-white-300 min-h-screen">
+        <Header />
+        <div className=" container mx-auto">
+          <p className="font-bold text-lg outline outline-l-red">
+            POPULAR IN THEATERS
+          </p>
           <div className="bg-white grid grid-cols-4 gap-4 p-4">
             {movies.length > 0 &&
               movies.map((movie: IMovie) => (
                 <div className="group" key={movie._id}>
-                  <div className="aspect-[9/12] relative group bg-lime-200">
+                  <div className="aspect-[9/12] relative group bg-white flex items-center justify-center cursor-pointer">
                     <Image
                       src={movie.poster || ""}
                       width={100}
                       height={100}
-                      alt="moviePoster"
+                      alt={movie.title}
                       className="w-full h-full object-cover rounded"
                     />
                     <div className="absolute inset-0 group-hover:bg-black/30 transition-all" />
+                    <BiPlayCircle
+                      className="absolute bg-black bg-opacity-50 rounded-full "
+                      size={64}
+                      color="white"
+                    />
                   </div>
-                  <Link
-                    className="text-orange-400"
-                    href={`movies/${movie._id}`}
-                  >
+                  <Link className="text-black" href={`movies/${movie._id}`}>
                     {movie.title}
                   </Link>
                 </div>
@@ -110,6 +114,7 @@ export default function Home({ movies, pagination }: IMovies) {
           />
         </div>
       </div>
+      <Footer />
     </>
   );
 }
